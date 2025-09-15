@@ -274,49 +274,49 @@ export default function DietitianPage() {
                 </div>
               </Card>
             ) : (
-              getContent().map((item: any, index) => (
+              getContent().map((item: Record<string, unknown>, index) => (
                 <Card key={index} className="hover:shadow-md transition-shadow">
                   {activeTab === 'meal-plan' && (
                     <div className="space-y-4">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.name || 'Plan żywieniowy'}</h3>
-                          <p className="text-sm text-gray-600 mb-3">{item.description || 'Opis planu żywieniowego'}</p>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{String(item.name || 'Plan żywieniowy')}</h3>
+                          <p className="text-sm text-gray-600 mb-3">{String(item.description || 'Opis planu żywieniowego')}</p>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div className="text-center p-2 bg-blue-50 rounded">
-                              <div className="font-semibold text-blue-700">{item.totalCalories || 0}</div>
+                              <div className="font-semibold text-blue-700">{String(item.totalCalories || 0)}</div>
                               <div className="text-blue-600">kcal</div>
                             </div>
                             <div className="text-center p-2 bg-green-50 rounded">
-                              <div className="font-semibold text-green-700">{item.nutrients?.protein || '0g'}</div>
+                              <div className="font-semibold text-green-700">{String((item.nutrients as Record<string, unknown>)?.protein || '0g')}</div>
                               <div className="text-green-600">białko</div>
                             </div>
                             <div className="text-center p-2 bg-yellow-50 rounded">
-                              <div className="font-semibold text-yellow-700">{item.nutrients?.carbs || '0g'}</div>
+                              <div className="font-semibold text-yellow-700">{String((item.nutrients as Record<string, unknown>)?.carbs || '0g')}</div>
                               <div className="text-yellow-600">węglowodany</div>
                             </div>
                             <div className="text-center p-2 bg-purple-50 rounded">
-                              <div className="font-semibold text-purple-700">{item.nutrients?.fat || '0g'}</div>
+                              <div className="font-semibold text-purple-700">{String((item.nutrients as Record<string, unknown>)?.fat || '0g')}</div>
                               <div className="text-purple-600">tłuszcze</div>
                             </div>
                           </div>
                         </div>
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.status ? getStatusColor(item.status) : 'bg-gray-100 text-gray-800'}`}>
-                          {item.status === 'active' ? 'Aktywny' : item.status === 'upcoming' ? 'Nadchodzący' : 'Plan'}
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.status ? getStatusColor(String(item.status)) : 'bg-gray-100 text-gray-800'}`}>
+                          {String(item.status) === 'active' ? 'Aktywny' : String(item.status) === 'upcoming' ? 'Nadchodzący' : 'Plan'}
                         </span>
                       </div>
                       
                       <div className="space-y-2">
                         <h4 className="font-medium text-gray-900">Posiłki:</h4>
-                        {item.meals ? item.meals.map((meal: any, index: number) => (
+                        {item.meals ? (item.meals as Array<Record<string, unknown>>).map((meal: Record<string, unknown>, index: number) => (
                           <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded">
                             <div className="flex items-center space-x-3">
                               <Icon name="clock" size="sm" color="gray" />
-                              <span className="font-medium">{meal.time || '00:00'}</span>
-                              <span className="text-gray-600">{meal.name}</span>
+                              <span className="font-medium">{String(meal.time || '00:00')}</span>
+                              <span className="text-gray-600">{String(meal.name)}</span>
                             </div>
                             <div className="text-sm text-gray-600">
-                              {meal.calories} kcal
+                              {String(meal.calories)} kcal
                             </div>
                           </div>
                         )) : <p className="text-gray-500">Brak posiłków</p>}
@@ -331,29 +331,29 @@ export default function DietitianPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-lg font-semibold text-gray-900">{item.name || 'Przepis'}</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">{String(item.name || 'Przepis')}</h3>
                           <div className="flex items-center space-x-2">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.difficulty ? getDifficultyColor(item.difficulty) : 'bg-gray-100 text-gray-800'}`}>
-                              {item.difficulty || 'Średni'}
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.difficulty ? getDifficultyColor(String(item.difficulty)) : 'bg-gray-100 text-gray-800'}`}>
+                              {String(item.difficulty || 'Średni')}
                             </span>
-                            <span className="text-sm text-gray-500">{item.calories || 0} kcal</span>
+                            <span className="text-sm text-gray-500">{String(item.calories || 0)} kcal</span>
                           </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
                           <div className="flex items-center space-x-2">
                             <Icon name="clock" size="sm" color="gray" />
-                            <span>{item.prepTime || '30 min'}</span>
+                            <span>{String(item.prepTime || '30 min')}</span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Icon name="tag" size="sm" color="gray" />
-                            <span>{item.category || 'Ogólne'}</span>
+                            <span>{String(item.category || 'Ogólne')}</span>
                           </div>
                         </div>
-                        <p className="text-sm text-gray-700 mb-3">{item.benefits || 'Korzyści zdrowotne'}</p>
+                        <p className="text-sm text-gray-700 mb-3">{String(item.benefits || 'Korzyści zdrowotne')}</p>
                         <div className="space-y-2">
                           <h4 className="text-sm font-medium text-gray-900">Składniki:</h4>
                           <ul className="text-sm text-gray-600 list-disc list-inside">
-                            {item.ingredients ? item.ingredients.map((ingredient: string, index: number) => (
+                            {item.ingredients ? (item.ingredients as Array<string>).map((ingredient: string, index: number) => (
                               <li key={index}>{ingredient}</li>
                             )) : <li>Brak składników</li>}
                           </ul>
@@ -365,26 +365,26 @@ export default function DietitianPage() {
                   {activeTab === 'tracking' && (
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold text-gray-900">{item.date || 'Dzisiaj'}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{String(item.date || 'Dzisiaj')}</h3>
                         <div className="flex items-center space-x-4 text-sm text-gray-600">
-                          <span>Waga: {item.weight || 0} kg</span>
-                          <span>Woda: {item.water || 0} szklanek</span>
+                          <span>Waga: {String(item.weight || 0)} kg</span>
+                          <span>Woda: {String(item.water || 0)} szklanek</span>
                         </div>
                       </div>
                       
                       <div className="space-y-2">
                         <h4 className="font-medium text-gray-900">Posiłki:</h4>
-                        {item.meals ? item.meals.map((meal: any, index: number) => (
+                        {item.meals ? (item.meals as Array<Record<string, unknown>>).map((meal: Record<string, unknown>, index: number) => (
                           <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded">
                             <div className="flex items-center space-x-3">
                               <Icon name="utensils" size="sm" color="gray" />
-                              <span className="font-medium">{meal.name}</span>
+                              <span className="font-medium">{String(meal.name)}</span>
                             </div>
                             <div className="flex items-center space-x-4 text-sm text-gray-600">
-                              <span>{meal.calories} kcal</span>
-                              <span>B: {meal.protein}g</span>
-                              <span>W: {meal.carbs}g</span>
-                              <span>T: {meal.fat}g</span>
+                              <span>{String(meal.calories)} kcal</span>
+                              <span>B: {String(meal.protein)}g</span>
+                              <span>W: {String(meal.carbs)}g</span>
+                              <span>T: {String(meal.fat)}g</span>
                             </div>
                           </div>
                         )) : <p className="text-gray-500">Brak posiłków</p>}
@@ -393,15 +393,15 @@ export default function DietitianPage() {
                       <div className="p-3 bg-blue-50 rounded">
                         <div className="text-sm font-medium text-blue-700 mb-1">Dzienne podsumowanie:</div>
                         <div className="text-sm text-blue-900">
-                          Łącznie: {item.totalCalories} kcal | Białko: {item.meals.reduce((sum, meal) => sum + meal.protein, 0)}g | 
-                          Węglowodany: {item.meals.reduce((sum, meal) => sum + meal.carbs, 0)}g | 
-                          Tłuszcze: {item.meals.reduce((sum, meal) => sum + meal.fat, 0)}g
+                          Łącznie: {String(item.totalCalories)} kcal | Białko: {item.meals ? (item.meals as Array<Record<string, unknown>>).reduce((sum, meal) => sum + Number(meal.protein || 0), 0) : 0}g | 
+                          Węglowodany: {item.meals ? (item.meals as Array<Record<string, unknown>>).reduce((sum, meal) => sum + Number(meal.carbs || 0), 0) : 0}g | 
+                          Tłuszcze: {item.meals ? (item.meals as Array<Record<string, unknown>>).reduce((sum, meal) => sum + Number(meal.fat || 0), 0) : 0}g
                         </div>
                       </div>
                       
-                      {item.notes && (
+                      {Boolean(item.notes) && (
                         <div className="p-3 bg-gray-50 rounded">
-                          <p className="text-sm text-gray-700">{item.notes}</p>
+                          <p className="text-sm text-gray-700">{String(item.notes)}</p>
                         </div>
                       )}
                     </div>
@@ -411,30 +411,30 @@ export default function DietitianPage() {
                     <div className="space-y-3">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.type}</h3>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{String(item.type || 'Konsultacja')}</h3>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                             <div className="flex items-center space-x-2">
                               <Icon name="user" size="sm" color="gray" />
-                              <span>{item.dietitian}</span>
+                              <span>{String(item.dietitian || 'Dietetyk')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="calendar" size="sm" color="gray" />
-                              <span>{item.date} {item.time}</span>
+                              <span>{String(item.date || 'Dzisiaj')} {String(item.time || '10:00')}</span>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-700 mt-2">{item.purpose}</p>
-                          {item.notes && (
-                            <p className="text-sm text-gray-600 mt-1">Notatki: {item.notes}</p>
+                          <p className="text-sm text-gray-700 mt-2">{String(item.purpose || 'Konsultacja żywieniowa')}</p>
+                          {Boolean(item.notes) && (
+                            <p className="text-sm text-gray-600 mt-1">Notatki: {String(item.notes)}</p>
                           )}
-                          {item.summary && (
+                          {Boolean(item.summary) && (
                             <div className="mt-3 p-3 bg-green-50 rounded-lg">
                               <p className="text-sm font-medium text-green-700 mb-1">Podsumowanie konsultacji:</p>
-                              <p className="text-sm text-green-900">{item.summary}</p>
+                              <p className="text-sm text-green-900">{String(item.summary)}</p>
                             </div>
                           )}
                         </div>
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                          {item.status === 'upcoming' ? 'Nadchodząca' : 'Zakończona'}
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(String(item.status || 'upcoming'))}`}>
+                          {String(item.status) === 'upcoming' ? 'Nadchodząca' : 'Zakończona'}
                         </span>
                       </div>
                     </div>

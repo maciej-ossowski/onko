@@ -264,8 +264,8 @@ export default function SchedulePage() {
                       
                       <div className="mt-3">
                         <p className="text-sm text-gray-700">{exam.description}</p>
-                        {exam.result && (
-                          <p className="text-sm text-green-600 mt-1 font-medium">Wynik: {exam.result}</p>
+                        {Boolean((exam as Record<string, unknown>).result) && (
+                          <p className="text-sm text-green-600 mt-1 font-medium">Wynik: {String((exam as Record<string, unknown>).result)}</p>
                         )}
                       </div>
                       

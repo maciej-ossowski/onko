@@ -184,7 +184,7 @@ export default function SideEffectsPage() {
                 <h1 className="text-3xl font-bold text-gray-900">Skutki uboczne</h1>
                 <p className="text-gray-600 mt-2">Monitoruj i zgłaszaj skutki uboczne leków</p>
               </div>
-              <Button variant="outline" onClick={() => setIsReportingOpen(true)}>
+              <Button variant="outline" onClick={() => console.log('Zgłoś skutek uboczny')}>
                 <Icon name="plus" size="sm" />
                 <span className="ml-2">Zgłoś skutek uboczny</span>
               </Button>

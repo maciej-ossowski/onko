@@ -238,7 +238,7 @@ export default function MedicationsPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <h3 className="text-lg font-semibold text-gray-900">
-                          {activeTab === 'side-effects' ? item.medication : item.name}
+                          {activeTab === 'side-effects' ? String((item as Record<string, unknown>).medication || (item as Record<string, unknown>).name || 'Lek') : String((item as Record<string, unknown>).name || 'Lek')}
                         </h3>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
                           {item.status}
@@ -249,22 +249,22 @@ export default function MedicationsPage() {
                         <div className="mt-2 space-y-2">
                           <div className="flex items-center space-x-4">
                             <span className="text-sm text-gray-600">
-                              <strong>Skutek:</strong> {item.effect}
+                              <strong>Skutek:</strong> {String((item as Record<string, unknown>).effect || 'Brak opisu')}
                             </span>
-                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(item.severity)}`}>
-                              {item.severity}
+                            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(String((item as Record<string, unknown>).severity || 'Łagodny'))}`}>
+                              {String((item as Record<string, unknown>).severity || 'Łagodny')}
                             </span>
                           </div>
                           <div className="flex items-center space-x-4">
                             <span className="text-sm text-gray-600">
-                              <strong>Częstość:</strong> {item.frequency}
+                              <strong>Częstość:</strong> {String((item as Record<string, unknown>).frequency || 'Codziennie')}
                             </span>
                             <span className="text-sm text-gray-600">
-                              <strong>Od:</strong> {item.startDate}
+                              <strong>Od:</strong> {String((item as Record<string, unknown>).startDate || 'Dzisiaj')}
                             </span>
                           </div>
-                          {item.notes && (
-                            <p className="text-sm text-gray-700 mt-2">{item.notes}</p>
+                          {Boolean((item as Record<string, unknown>).notes) && (
+                            <p className="text-sm text-gray-700 mt-2">{String((item as Record<string, unknown>).notes)}</p>
                           )}
                         </div>
                       ) : (
@@ -273,19 +273,19 @@ export default function MedicationsPage() {
                             <div className="flex items-center space-x-2">
                               <Icon name="pill" size="sm" color="gray" />
                               <span className="text-sm text-gray-600">
-                                <strong>Dawka:</strong> {item.dosage}
+                                <strong>Dawka:</strong> {String((item as Record<string, unknown>).dosage || 'Brak informacji')}
                               </span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="clock" size="sm" color="gray" />
                               <span className="text-sm text-gray-600">
-                                <strong>Częstość:</strong> {item.frequency}
+                                <strong>Częstość:</strong> {String((item as Record<string, unknown>).frequency || 'Codziennie')}
                               </span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="calendar" size="sm" color="gray" />
                               <span className="text-sm text-gray-600">
-                                <strong>Godziny:</strong> {item.time}
+                                <strong>Godziny:</strong> {String((item as Record<string, unknown>).time || 'Brak informacji')}
                               </span>
                             </div>
                           </div>
@@ -293,11 +293,11 @@ export default function MedicationsPage() {
                           <div className="space-y-1">
                             <div className="flex items-center space-x-2">
                               <Icon name="doctor" size="sm" color="gray" />
-                              <span className="text-sm text-gray-600">{item.doctor}</span>
+                              <span className="text-sm text-gray-600">{String((item as Record<string, unknown>).doctor || 'Brak informacji')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="info" size="sm" color="gray" />
-                              <span className="text-sm text-gray-600">{item.purpose}</span>
+                              <span className="text-sm text-gray-600">{String((item as Record<string, unknown>).purpose || 'Brak informacji')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="calendar" size="sm" color="gray" />
@@ -314,11 +314,11 @@ export default function MedicationsPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-sm font-medium text-blue-900">Następna dawka</p>
-                              <p className="text-sm text-blue-700">{item.nextDose}</p>
+                              <p className="text-sm text-blue-700">{String((item as Record<string, unknown>).nextDose || 'Brak informacji')}</p>
                             </div>
                             <div className="text-right">
                               <p className="text-sm font-medium text-blue-900">Pozostało</p>
-                              <p className="text-sm text-blue-700">{item.remaining} tabletek</p>
+                              <p className="text-sm text-blue-700">{String((item as Record<string, unknown>).remaining || 0)} tabletek</p>
                             </div>
                           </div>
                         </div>

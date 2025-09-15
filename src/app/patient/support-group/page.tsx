@@ -318,29 +318,29 @@ export default function SupportGroupPage() {
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-2">
-                            {item.isPinned && (
+                            {Boolean((item as Record<string, unknown>).isPinned) && (
                               <Icon name="pin" size="sm" color="primary" />
                             )}
-                            <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                            <h3 className="text-lg font-semibold text-gray-900">{String((item as Record<string, unknown>).title || 'Temat')}</h3>
                           </div>
                           <div className="flex items-center space-x-4 text-sm text-gray-600">
-                            <span>Autor: {item.author}</span>
-                            <span>{item.date}</span>
-                            <span className="text-pink-600">{item.category}</span>
+                            <span>Autor: {String((item as Record<string, unknown>).author || 'Autor')}</span>
+                            <span>{String((item as Record<string, unknown>).date || 'Dzisiaj')}</span>
+                            <span className="text-pink-600">{String((item as Record<string, unknown>).category || 'Ogólne')}</span>
                           </div>
                         </div>
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
                           <div className="flex items-center space-x-1">
                             <Icon name="message" size="sm" />
-                            <span>{item.replies}</span>
+                            <span>{String((item as Record<string, unknown>).replies || 0)}</span>
                           </div>
                           <div className="flex items-center space-x-1">
                             <Icon name="heart" size="sm" />
-                            <span>{item.likes}</span>
+                            <span>{String((item as Record<string, unknown>).likes || 0)}</span>
                           </div>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-500">Ostatnia aktywność: {item.lastActivity}</p>
+                      <p className="text-sm text-gray-500">Ostatnia aktywność: {String((item as Record<string, unknown>).lastActivity || 'Dzisiaj')}</p>
                     </div>
                   )}
 
@@ -348,34 +348,34 @@ export default function SupportGroupPage() {
                     <div className="space-y-3">
                       <div className="flex items-start space-x-4">
                         <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-                          <Icon name={getTypeIcon(item.type)} size="md" className="text-pink-600" />
+                          <Icon name={getTypeIcon(String((item as Record<string, unknown>).type || 'Spotkanie'))} size="md" className="text-pink-600" />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between mb-2">
-                            <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                              {item.status === 'upcoming' ? 'Nadchodzące' : item.status}
+                            <h3 className="text-lg font-semibold text-gray-900">{String((item as Record<string, unknown>).title || 'Temat')}</h3>
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(String((item as Record<string, unknown>).status || 'Aktywne'))}`}>
+                              {String((item as Record<string, unknown>).status || 'Aktywne') === 'upcoming' ? 'Nadchodzące' : String((item as Record<string, unknown>).status || 'Aktywne')}
                             </span>
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                             <div className="flex items-center space-x-2">
                               <Icon name="calendar" size="sm" color="gray" />
-                              <span>{item.date} {item.time}</span>
+                              <span>{String((item as Record<string, unknown>).date || 'Dzisiaj')} {String((item as Record<string, unknown>).time || '10:00')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="map-pin" size="sm" color="gray" />
-                              <span>{item.location}</span>
+                              <span>{String((item as Record<string, unknown>).location || 'Online')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="users" size="sm" color="gray" />
-                              <span>{item.participants}/{item.maxParticipants} uczestników</span>
+                              <span>{String((item as Record<string, unknown>).participants || 0)}/{String((item as Record<string, unknown>).maxParticipants || 0)} uczestników</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="tag" size="sm" color="gray" />
-                              <span>{item.type}</span>
+                              <span>{String((item as Record<string, unknown>).type || 'Spotkanie')}</span>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-700 mt-2">{item.description}</p>
+                          <p className="text-sm text-gray-700 mt-2">{String((item as Record<string, unknown>).description || 'Brak opisu')}</p>
                         </div>
                       </div>
                     </div>
@@ -384,20 +384,20 @@ export default function SupportGroupPage() {
                   {activeTab === 'members' && (
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
-                        <span className="text-sm font-semibold text-pink-700">{item.avatar}</span>
+                        <span className="text-sm font-semibold text-pink-700">{String((item as Record<string, unknown>).avatar || 'U')}</span>
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-1">
-                          <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                            {item.status}
+                          <h3 className="text-lg font-semibold text-gray-900">{String((item as Record<string, unknown>).name || 'Użytkownik')}</h3>
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(String((item as Record<string, unknown>).status || 'Aktywne'))}`}>
+                            {String((item as Record<string, unknown>).status || 'Aktywne')}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 mb-2">{item.story}</p>
+                        <p className="text-sm text-gray-600 mb-2">{String((item as Record<string, unknown>).story || 'Brak historii')}</p>
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span>Dołączyła: {item.joinDate}</span>
-                          <span>Posty: {item.posts}</span>
-                          <span>Pomocne: {item.helpful}</span>
+                          <span>Dołączyła: {String((item as Record<string, unknown>).joinDate || 'Dzisiaj')}</span>
+                          <span>Posty: {String((item as Record<string, unknown>).posts || 0)}</span>
+                          <span>Pomocne: {String((item as Record<string, unknown>).helpful || 0)}</span>
                         </div>
                       </div>
                     </div>
@@ -406,17 +406,17 @@ export default function SupportGroupPage() {
                   {activeTab === 'resources' && (
                     <div className="flex items-start space-x-4">
                       <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-                        <Icon name={getTypeIcon(item.type)} size="lg" color="primary" />
+                        <Icon name={getTypeIcon(String((item as Record<string, unknown>).type || 'Spotkanie'))} size="lg" color="primary" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                          <span className="text-sm text-gray-500">{item.type} • {item.size}</span>
+                          <h3 className="text-lg font-semibold text-gray-900">{String((item as Record<string, unknown>).title || 'Temat')}</h3>
+                          <span className="text-sm text-gray-500">{String((item as Record<string, unknown>).type || 'Spotkanie')} • {String((item as Record<string, unknown>).size || 'Brak informacji')}</span>
                         </div>
-                        <p className="text-sm text-gray-700 mb-2">{item.description}</p>
+                        <p className="text-sm text-gray-700 mb-2">{String((item as Record<string, unknown>).description || 'Brak opisu')}</p>
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span className="text-pink-600">{item.category}</span>
-                          <span>Pobrania: {item.downloads}</span>
+                          <span className="text-pink-600">{String((item as Record<string, unknown>).category || 'Ogólne')}</span>
+                          <span>Pobrania: {String((item as Record<string, unknown>).downloads || '0')}</span>
                         </div>
                       </div>
                     </div>

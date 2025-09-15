@@ -284,44 +284,44 @@ export default function PsychologistPage() {
                 </div>
               </Card>
             ) : (
-              getContent().map((item) => (
-                <Card key={item.id} className="hover:shadow-md transition-shadow">
+              getContent().map((item: Record<string, unknown>, index: number) => (
+                <Card key={index} className="hover:shadow-md transition-shadow">
                   {activeTab === 'appointments' && (
                     <div className="space-y-3">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.type}</h3>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{String(item.type || 'Sesja')}</h3>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                             <div className="flex items-center space-x-2">
                               <Icon name="user" size="sm" color="gray" />
-                              <span>{item.psychologist}</span>
+                              <span>{String(item.psychologist || 'Psycholog')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="calendar" size="sm" color="gray" />
-                              <span>{item.date} {item.time}</span>
+                              <span>{String(item.date || 'Dzisiaj')} {String(item.time || '10:00')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="clock" size="sm" color="gray" />
-                              <span>{item.duration}</span>
+                              <span>{String(String(item.duration || '60 min') || '60 min')}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Icon name="map-pin" size="sm" color="gray" />
-                              <span>{item.location}</span>
+                              <span>{String(item.location || 'Online')}</span>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-700 mt-2">{item.purpose}</p>
-                          {item.notes && (
-                            <p className="text-sm text-gray-600 mt-1">Notatki: {item.notes}</p>
+                          <p className="text-sm text-gray-700 mt-2">{String(item.purpose || 'Konsultacja')}</p>
+                          {String(item.notes || 'Brak notatek') && (
+                            <p className="text-sm text-gray-600 mt-1">Notatki: {String(item.notes || 'Brak notatek')}</p>
                           )}
-                          {item.summary && (
+                          {String(item.summary || 'Brak podsumowania') && (
                             <div className="mt-3 p-3 bg-green-50 rounded-lg">
                               <p className="text-sm font-medium text-green-700 mb-1">Podsumowanie wizyty:</p>
-                              <p className="text-sm text-green-900">{item.summary}</p>
+                              <p className="text-sm text-green-900">{String(item.summary || 'Brak podsumowania')}</p>
                             </div>
                           )}
                         </div>
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                          {item.status === 'upcoming' ? 'Nadchodząca' : 'Zakończona'}
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(String(item.status || 'Zaplanowana'))}`}>
+                          {String(item.status || 'Zaplanowana') === 'upcoming' ? 'Nadchodząca' : 'Zakończona'}
                         </span>
                       </div>
                     </div>
@@ -334,13 +334,13 @@ export default function PsychologistPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                          <span className="text-sm text-gray-500">{item.type} • {item.size}</span>
+                          <h3 className="text-lg font-semibold text-gray-900">{String(item.title || 'Zasób')}</h3>
+                          <span className="text-sm text-gray-500">{String(item.type || 'Sesja')} • {String(item.size || 'Brak informacji')}</span>
                         </div>
-                        <p className="text-sm text-gray-700 mb-2">{item.description}</p>
+                        <p className="text-sm text-gray-700 mb-2">{String(item.description || 'Brak opisu')}</p>
                         <div className="flex items-center space-x-4 text-sm text-gray-500">
-                          <span className="text-purple-600">{item.category}</span>
-                          <span>Pobrania: {item.downloads}</span>
+                          <span className="text-purple-600">{String(item.category || 'Ogólne')}</span>
+                          <span>Pobrania: {String(item.downloads || '0')}</span>
                         </div>
                       </div>
                     </div>
@@ -350,12 +350,12 @@ export default function PsychologistPage() {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getMoodColor(item.mood)}`}>
-                            <Icon name={getMoodIcon(item.mood)} size="lg" />
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getMoodColor(String(item.mood || 'neutral'))}`}>
+                            <Icon name={getMoodIcon(String(item.mood || 'neutral'))} size="lg" />
                           </div>
                           <div>
-                            <h3 className="text-lg font-semibold text-gray-900">{item.date}</h3>
-                            <p className="text-sm text-gray-600 capitalize">{item.mood}</p>
+                            <h3 className="text-lg font-semibold text-gray-900">{String(item.date || 'Dzisiaj')}</h3>
+                            <p className="text-sm text-gray-600 capitalize">{String(item.mood || 'neutral')}</p>
                           </div>
                         </div>
                       </div>
@@ -368,11 +368,11 @@ export default function PsychologistPage() {
                               <div
                                 key={i}
                                 className={`w-2 h-2 rounded-full ${
-                                  i < item.energy ? 'bg-green-500' : 'bg-gray-200'
+                                  i < Number(item.energy || 0) ? 'bg-green-500' : 'bg-gray-200'
                                 }`}
                               />
                             ))}
-                            <span className="text-sm text-gray-600 ml-2">{item.energy}/10</span>
+                            <span className="text-sm text-gray-600 ml-2">{Number(item.energy || 0)}/10</span>
                           </div>
                         </div>
                         
@@ -383,11 +383,11 @@ export default function PsychologistPage() {
                               <div
                                 key={i}
                                 className={`w-2 h-2 rounded-full ${
-                                  i < item.anxiety ? 'bg-red-500' : 'bg-gray-200'
+                                  i < Number(item.anxiety || 0) ? 'bg-red-500' : 'bg-gray-200'
                                 }`}
                               />
                             ))}
-                            <span className="text-sm text-gray-600 ml-2">{item.anxiety}/10</span>
+                            <span className="text-sm text-gray-600 ml-2">{Number(item.anxiety || 0)}/10</span>
                           </div>
                         </div>
                         
@@ -398,18 +398,18 @@ export default function PsychologistPage() {
                               <div
                                 key={i}
                                 className={`w-2 h-2 rounded-full ${
-                                  i < item.sleep ? 'bg-blue-500' : 'bg-gray-200'
+                                  i < Number(item.sleep || 0) ? 'bg-blue-500' : 'bg-gray-200'
                                 }`}
                               />
                             ))}
-                            <span className="text-sm text-gray-600 ml-2">{item.sleep}/10</span>
+                            <span className="text-sm text-gray-600 ml-2">{Number(item.sleep || 0)}/10</span>
                           </div>
                         </div>
                       </div>
                       
-                      {item.notes && (
+                      {String(item.notes || 'Brak notatek') && (
                         <div className="p-3 bg-gray-50 rounded-lg">
-                          <p className="text-sm text-gray-700">{item.notes}</p>
+                          <p className="text-sm text-gray-700">{String(item.notes || 'Brak notatek')}</p>
                         </div>
                       )}
                     </div>
@@ -421,20 +421,20 @@ export default function PsychologistPage() {
                         <Icon name="phone" size="lg" color="error" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">{item.name}</h3>
-                        <p className="text-sm text-gray-600 mb-2">{item.role}</p>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-1">{String(item.name || 'Psycholog')}</h3>
+                        <p className="text-sm text-gray-600 mb-2">{String(item.role || 'Psycholog')}</p>
                         <div className="space-y-1 text-sm text-gray-600">
                           <div className="flex items-center space-x-2">
                             <Icon name="phone" size="sm" color="gray" />
-                            <span>{item.phone}</span>
+                            <span>{String(item.phone || 'Brak numeru')}</span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Icon name="mail" size="sm" color="gray" />
-                            <span>{item.email}</span>
+                            <span>{String(item.email || 'Brak email')}</span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Icon name="clock" size="sm" color="gray" />
-                            <span>{item.availability}</span>
+                            <span>{String(item.availability || 'Brak informacji')}</span>
                           </div>
                         </div>
                       </div>
