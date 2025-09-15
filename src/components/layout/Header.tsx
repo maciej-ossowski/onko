@@ -154,9 +154,10 @@ export default function Header({
                   {/* Name */}
                   <div className="text-left">
                     <div className="text-sm font-medium text-white">
-                      {userName || config.label}
+                      <span className="hidden sm:inline">{userName || config.label}</span>
+                      <span className="sm:hidden">{userName ? getInitials(userName) : config.label.charAt(0)}</span>
                     </div>
-                    <div className={`text-xs ${userRole === 'patient' ? 'text-pink-200' : userRole === 'doctor' ? 'text-blue-200' : 'text-green-200'}`}>
+                    <div className={`text-xs ${userRole === 'patient' ? 'text-pink-200' : userRole === 'doctor' ? 'text-blue-200' : 'text-green-200'} hidden sm:block`}>
                       {config.label}
                     </div>
                   </div>
