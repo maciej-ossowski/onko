@@ -143,7 +143,7 @@ export default function Header({
             {/* User Dropdown */}
             <Dropdown
               trigger={
-                <div className={`flex items-center space-x-3 cursor-pointer rounded-lg px-3 py-2 transition-colors ${userRole === 'patient' ? 'hover:bg-pink-700' : userRole === 'doctor' ? 'hover:bg-blue-700' : 'hover:bg-green-700'}`}>
+                <div className={`flex items-center cursor-pointer rounded-lg px-3 py-2 transition-colors ${userRole === 'patient' ? 'hover:bg-pink-700' : userRole === 'doctor' ? 'hover:bg-blue-700' : 'hover:bg-green-700'}`}>
                   {/* Avatar */}
                   <div className={`w-8 h-8 rounded-full ${config.bgColor} flex items-center justify-center`}>
                     <span className={`text-xs font-semibold ${config.color}`}>
@@ -151,19 +151,18 @@ export default function Header({
                     </span>
                   </div>
                   
-                  {/* Name */}
-                  <div className="text-left">
-                    <div className="text-sm font-medium text-white">
-                      <span className="hidden sm:inline">{userName || config.label}</span>
-                      <span className="sm:hidden">{userName ? getInitials(userName) : config.label.charAt(0)}</span>
+                  {/* Name - only on larger screens */}
+                  <div className="text-left hidden sm:block">
+                    <div className="text-sm font-medium text-white ml-3">
+                      {userName || config.label}
                     </div>
-                    <div className={`text-xs ${userRole === 'patient' ? 'text-pink-200' : userRole === 'doctor' ? 'text-blue-200' : 'text-green-200'} hidden sm:block`}>
+                    <div className={`text-xs ${userRole === 'patient' ? 'text-pink-200' : userRole === 'doctor' ? 'text-blue-200' : 'text-green-200'}`}>
                       {config.label}
                     </div>
                   </div>
                   
-                  {/* Dropdown Arrow */}
-                  <Icon name="arrow-down" size="sm" className="text-gray-300" />
+                  {/* Dropdown Arrow - only on larger screens */}
+                  <Icon name="arrow-down" size="sm" className="text-gray-300 hidden sm:block ml-2" />
                 </div>
               }
               items={dropdownItems}
