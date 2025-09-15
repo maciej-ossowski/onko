@@ -121,6 +121,10 @@ export default function PatientDashboard() {
         onLogout={handleLogout}
         onSettings={handleSettings}
         onShare={handleShare}
+        onChat={handleChat}
+        onNotifications={handleNotifications}
+        chatCount={3}
+        notificationsCount={2}
         actions={
           <div className="flex items-center space-x-2">
             {/* Chat Button */}

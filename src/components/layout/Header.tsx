@@ -15,6 +15,10 @@ interface HeaderProps {
   actions?: React.ReactNode;
   onSettings?: () => void;
   onShare?: () => void;
+  onChat?: () => void;
+  onNotifications?: () => void;
+  chatCount?: number;
+  notificationsCount?: number;
 }
 
 export default function Header({
@@ -27,7 +31,11 @@ export default function Header({
   onBack,
   actions,
   onSettings,
-  onShare
+  onShare,
+  onChat,
+  onNotifications,
+  chatCount = 0,
+  notificationsCount = 0
 }: HeaderProps) {
   const roleConfig = {
     patient: {
@@ -64,6 +72,17 @@ export default function Header({
 
   // Create dropdown items
   const dropdownItems = [
+    // Add chat and notifications for patients on mobile
+    ...(userRole === 'patient' && onChat ? [{
+      label: `Wiadomości${chatCount > 0 ? ` (${chatCount})` : ''}`,
+      icon: 'message' as const,
+      onClick: onChat
+    }] : []),
+    ...(userRole === 'patient' && onNotifications ? [{
+      label: `Powiadomienia${notificationsCount > 0 ? ` (${notificationsCount})` : ''}`,
+      icon: 'mail' as const,
+      onClick: onNotifications
+    }] : []),
     {
       label: 'Ustawienia',
       icon: 'settings',
@@ -116,7 +135,7 @@ export default function Header({
           
           <div className="flex items-center space-x-4">
             {actions && (
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 {actions}
               </div>
             )}
