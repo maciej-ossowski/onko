@@ -40,9 +40,6 @@ export default function PatientDashboard() {
     router.push('/');
   };
 
-  const handleQRScan = () => {
-    setIsQRScannerOpen(true);
-  };
 
   const handleRiskCalculator = () => {
     setIsRiskCalculatorOpen(true);

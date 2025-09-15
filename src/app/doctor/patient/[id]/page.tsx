@@ -1,4 +1,4 @@
-export default function DoctorPatientView({ params }: { params: { id: string } }) {
+export default function DoctorPatientView({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -168,7 +168,7 @@ export default function DoctorPatientView({ params }: { params: { id: string } }
                 </div>
                 <div className="text-sm text-gray-500 mt-2">
                   <p>Ostatni wpis: 12.01.2025, 15:30</p>
-                  <p>"Zwiększony ból w okolicy rany, gorączka"</p>
+                  <p>&ldquo;Zwiększony ból w okolicy rany, gorączka&rdquo;</p>
                 </div>
               </div>
             </div>

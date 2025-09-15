@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
-import Card from '../ui/Card';
 
 interface Notification {
   id: number;
@@ -178,7 +177,7 @@ export default function NotificationsModal({ isOpen, onClose, userRole }: Notifi
             </div>
           ) : (
             filteredNotifications.map((notification) => (
-              <Card
+              <div
                 key={notification.id}
                 className={`cursor-pointer transition-all hover:shadow-md ${
                   !notification.isRead ? 'border-l-4 border-pink-500' : ''
@@ -214,13 +213,12 @@ export default function NotificationsModal({ isOpen, onClose, userRole }: Notifi
                         variant="ghost"
                         size="sm"
                         className="mt-2 text-xs"
-                        onClick={(e) => {
-                          e.stopPropagation();
+                        onClick={() => {
                           console.log(`Akcja: ${notification.action}`);
                         }}
                       >
                         {notification.action}
-                        <Icon name="arrow-right" size="xs" className="ml-1" />
+                        <Icon name="arrow-right" size="sm" className="ml-1" />
                       </Button>
                     )}
                   </div>
@@ -229,7 +227,7 @@ export default function NotificationsModal({ isOpen, onClose, userRole }: Notifi
                     <div className="w-2 h-2 bg-pink-500 rounded-full flex-shrink-0"></div>
                   )}
                 </div>
-              </Card>
+              </div>
             ))
           )}
         </div>

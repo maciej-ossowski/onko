@@ -60,13 +60,7 @@ export default function DiloCard({ isOpen, onClose, userRole }: DiloCardProps) {
     setIsShareModalOpen(true);
   };
 
-  const roleColors = {
-    patient: 'pink',
-    doctor: 'blue',
-    admin: 'green'
-  };
 
-  const currentColor = roleColors[userRole];
 
   return (
     <Modal

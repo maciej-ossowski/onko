@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 import Icon from '../ui/Icon';
-import Card from '../ui/Card';
 
 interface Message {
   id: number;

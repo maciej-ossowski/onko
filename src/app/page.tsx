@@ -158,7 +158,7 @@ export default function Home() {
         {/* Dodatkowa karta z pełną listą funkcjonalności na hover */}
         {hoveredCard && (
           <div className="mt-8 transition-all duration-300 ease-in-out">
-            <Card className="p-8" elevation="lg" style={{ border: '2px solid #3b82f6' }}>
+            <Card className="p-8 border-2 border-blue-500" elevation="lg">
               <div className="text-center">
                 <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${
                   hoveredCard === 'doctor' ? 'bg-blue-100' : 'bg-green-100'

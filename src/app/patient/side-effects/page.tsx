@@ -12,7 +12,6 @@ import HeaderActions from '@/components/patient/HeaderActions';
 export default function SideEffectsPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'all' | 'active' | 'resolved' | 'severe'>('all');
-  const [isReportingOpen, setIsReportingOpen] = useState(false);
 
   const handleLogout = () => {
     router.push('/');

@@ -274,52 +274,52 @@ export default function DietitianPage() {
                 </div>
               </Card>
             ) : (
-              getContent().map((item) => (
-                <Card key={item.id} className="hover:shadow-md transition-shadow">
+              getContent().map((item: any, index) => (
+                <Card key={index} className="hover:shadow-md transition-shadow">
                   {activeTab === 'meal-plan' && (
                     <div className="space-y-4">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.name}</h3>
-                          <p className="text-sm text-gray-600 mb-3">{item.description}</p>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.name || 'Plan żywieniowy'}</h3>
+                          <p className="text-sm text-gray-600 mb-3">{item.description || 'Opis planu żywieniowego'}</p>
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div className="text-center p-2 bg-blue-50 rounded">
-                              <div className="font-semibold text-blue-700">{item.totalCalories}</div>
+                              <div className="font-semibold text-blue-700">{item.totalCalories || 0}</div>
                               <div className="text-blue-600">kcal</div>
                             </div>
                             <div className="text-center p-2 bg-green-50 rounded">
-                              <div className="font-semibold text-green-700">{item.nutrients.protein}</div>
+                              <div className="font-semibold text-green-700">{item.nutrients?.protein || '0g'}</div>
                               <div className="text-green-600">białko</div>
                             </div>
                             <div className="text-center p-2 bg-yellow-50 rounded">
-                              <div className="font-semibold text-yellow-700">{item.nutrients.carbs}</div>
+                              <div className="font-semibold text-yellow-700">{item.nutrients?.carbs || '0g'}</div>
                               <div className="text-yellow-600">węglowodany</div>
                             </div>
                             <div className="text-center p-2 bg-purple-50 rounded">
-                              <div className="font-semibold text-purple-700">{item.nutrients.fat}</div>
+                              <div className="font-semibold text-purple-700">{item.nutrients?.fat || '0g'}</div>
                               <div className="text-purple-600">tłuszcze</div>
                             </div>
                           </div>
                         </div>
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
-                          {item.status === 'active' ? 'Aktywny' : 'Nadchodzący'}
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.status ? getStatusColor(item.status) : 'bg-gray-100 text-gray-800'}`}>
+                          {item.status === 'active' ? 'Aktywny' : item.status === 'upcoming' ? 'Nadchodzący' : 'Plan'}
                         </span>
                       </div>
                       
                       <div className="space-y-2">
                         <h4 className="font-medium text-gray-900">Posiłki:</h4>
-                        {item.meals.map((meal, index) => (
+                        {item.meals ? item.meals.map((meal: any, index: number) => (
                           <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded">
                             <div className="flex items-center space-x-3">
                               <Icon name="clock" size="sm" color="gray" />
-                              <span className="font-medium">{meal.time}</span>
+                              <span className="font-medium">{meal.time || '00:00'}</span>
                               <span className="text-gray-600">{meal.name}</span>
                             </div>
                             <div className="text-sm text-gray-600">
                               {meal.calories} kcal
                             </div>
                           </div>
-                        ))}
+                        )) : <p className="text-gray-500">Brak posiłków</p>}
                       </div>
                     </div>
                   )}
@@ -331,31 +331,31 @@ export default function DietitianPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
+                          <h3 className="text-lg font-semibold text-gray-900">{item.name || 'Przepis'}</h3>
                           <div className="flex items-center space-x-2">
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDifficultyColor(item.difficulty)}`}>
-                              {item.difficulty}
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.difficulty ? getDifficultyColor(item.difficulty) : 'bg-gray-100 text-gray-800'}`}>
+                              {item.difficulty || 'Średni'}
                             </span>
-                            <span className="text-sm text-gray-500">{item.calories} kcal</span>
+                            <span className="text-sm text-gray-500">{item.calories || 0} kcal</span>
                           </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
                           <div className="flex items-center space-x-2">
                             <Icon name="clock" size="sm" color="gray" />
-                            <span>{item.prepTime}</span>
+                            <span>{item.prepTime || '30 min'}</span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Icon name="tag" size="sm" color="gray" />
-                            <span>{item.category}</span>
+                            <span>{item.category || 'Ogólne'}</span>
                           </div>
                         </div>
-                        <p className="text-sm text-gray-700 mb-3">{item.benefits}</p>
+                        <p className="text-sm text-gray-700 mb-3">{item.benefits || 'Korzyści zdrowotne'}</p>
                         <div className="space-y-2">
                           <h4 className="text-sm font-medium text-gray-900">Składniki:</h4>
                           <ul className="text-sm text-gray-600 list-disc list-inside">
-                            {item.ingredients.map((ingredient, index) => (
+                            {item.ingredients ? item.ingredients.map((ingredient: string, index: number) => (
                               <li key={index}>{ingredient}</li>
-                            ))}
+                            )) : <li>Brak składników</li>}
                           </ul>
                         </div>
                       </div>
@@ -365,16 +365,16 @@ export default function DietitianPage() {
                   {activeTab === 'tracking' && (
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold text-gray-900">{item.date}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{item.date || 'Dzisiaj'}</h3>
                         <div className="flex items-center space-x-4 text-sm text-gray-600">
-                          <span>Waga: {item.weight} kg</span>
-                          <span>Woda: {item.water} szklanek</span>
+                          <span>Waga: {item.weight || 0} kg</span>
+                          <span>Woda: {item.water || 0} szklanek</span>
                         </div>
                       </div>
                       
                       <div className="space-y-2">
                         <h4 className="font-medium text-gray-900">Posiłki:</h4>
-                        {item.meals.map((meal, index) => (
+                        {item.meals ? item.meals.map((meal: any, index: number) => (
                           <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded">
                             <div className="flex items-center space-x-3">
                               <Icon name="utensils" size="sm" color="gray" />
@@ -387,7 +387,7 @@ export default function DietitianPage() {
                               <span>T: {meal.fat}g</span>
                             </div>
                           </div>
-                        ))}
+                        )) : <p className="text-gray-500">Brak posiłków</p>}
                       </div>
                       
                       <div className="p-3 bg-blue-50 rounded">

@@ -7,13 +7,7 @@ interface FooterProps {
 }
 
 export default function Footer({ userRole }: FooterProps) {
-  const roleColors = {
-    patient: 'pink',
-    doctor: 'blue',
-    admin: 'green'
-  };
 
-  const color = roleColors[userRole];
 
   const footerSections = {
     patient: [

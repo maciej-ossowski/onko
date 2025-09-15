@@ -23,7 +23,7 @@ interface DiagnosticTest {
 }
 
 export default function Diagnostics({ isOpen, onClose, userRole }: DiagnosticsProps) {
-  const [tests, setTests] = useState<DiagnosticTest[]>([
+  const [tests] = useState<DiagnosticTest[]>([
     {
       id: '1',
       name: 'Mammografia',
@@ -111,11 +111,6 @@ export default function Diagnostics({ isOpen, onClose, userRole }: DiagnosticsPr
 
   const filteredTests = tests.filter(test => test.status === selectedTab);
 
-  const roleColors = {
-    patient: 'pink',
-    doctor: 'blue',
-    admin: 'green'
-  };
 
   return (
     <Modal

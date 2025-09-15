@@ -11,7 +11,7 @@ interface MedicationsModalProps {
   userRole: 'patient' | 'doctor' | 'admin';
 }
 
-export default function MedicationsModal({ isOpen, onClose, userRole }: MedicationsModalProps) {
+export default function MedicationsModal({ isOpen, onClose }: MedicationsModalProps) {
   if (!isOpen) return null;
 
   const medications = [

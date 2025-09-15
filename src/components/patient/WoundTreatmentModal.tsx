@@ -11,7 +11,7 @@ interface WoundTreatmentModalProps {
   userRole: 'patient' | 'doctor' | 'admin';
 }
 
-export default function WoundTreatmentModal({ isOpen, onClose, userRole }: WoundTreatmentModalProps) {
+export default function WoundTreatmentModal({ isOpen, onClose }: WoundTreatmentModalProps) {
   if (!isOpen) return null;
 
   const woundData = {

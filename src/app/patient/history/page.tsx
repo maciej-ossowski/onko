@@ -177,15 +177,6 @@ export default function HistoryPage() {
     }
   ];
 
-  const getEvents = () => {
-    switch (activeTab) {
-      case 'timeline': return timelineEvents;
-      case 'treatments': return treatments;
-      case 'examinations': return examinations;
-      case 'hospitalizations': return hospitalizations;
-      default: return [];
-    }
-  };
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -376,8 +367,8 @@ export default function HistoryPage() {
                           <div className="mb-3">
                             <p className="text-sm font-medium text-gray-700 mb-1">Leki:</p>
                             <div className="flex flex-wrap gap-2">
-                              {treatment.drugs.map((drug, index) => (
-                                <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                              {treatment.drugs.map((drug) => (
+                                <span key={drug} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                   {drug}
                                 </span>
                               ))}
@@ -389,8 +380,8 @@ export default function HistoryPage() {
                           <div className="mb-3">
                             <p className="text-sm font-medium text-gray-700 mb-1">Skutki uboczne:</p>
                             <div className="flex flex-wrap gap-2">
-                              {treatment.sideEffects.map((effect, index) => (
-                                <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                              {treatment.sideEffects.map((effect) => (
+                                <span key={effect} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                                   {effect}
                                 </span>
                               ))}

@@ -12,7 +12,6 @@ import HeaderActions from '@/components/patient/HeaderActions';
 export default function AppointmentsPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<'upcoming' | 'completed' | 'cancelled'>('upcoming');
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   const handleLogout = () => {
     router.push('/');
@@ -159,7 +158,7 @@ export default function AppointmentsPage() {
                 <h1 className="text-3xl font-bold text-gray-900">Moje wizyty</h1>
                 <p className="text-gray-600 mt-2">Zarządzaj swoimi wizytami i umów nowe</p>
               </div>
-              <Button variant="outline" onClick={() => setIsBookingOpen(true)}>
+              <Button variant="outline" onClick={() => console.log('Umów wizytę')}>
                 <Icon name="plus" size="sm" />
                 <span className="ml-2">Umów wizytę</span>
               </Button>

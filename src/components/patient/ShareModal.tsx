@@ -71,11 +71,6 @@ export default function ShareModal({ isOpen, onClose, userRole, shareType }: Sha
     }
   };
 
-  const roleColors = {
-    patient: 'pink',
-    doctor: 'blue',
-    admin: 'green'
-  };
 
   return (
     <Modal

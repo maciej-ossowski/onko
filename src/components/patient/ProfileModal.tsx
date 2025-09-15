@@ -11,7 +11,7 @@ interface ProfileModalProps {
   userRole: 'patient' | 'doctor' | 'admin';
 }
 
-export default function ProfileModal({ isOpen, onClose, userRole }: ProfileModalProps) {
+export default function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
   if (!isOpen) return null;
 
   const profileData = {

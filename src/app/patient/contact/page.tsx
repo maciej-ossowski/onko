@@ -286,7 +286,7 @@ export default function ContactPage() {
               
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Jak mogę zgłosić problem z aplikacją?</h3>
-                <p className="text-gray-700">Możesz zgłosić problem przez formularz kontaktowy wybierając kategorię "Wsparcie techniczne" lub dzwoniąc na dedykowaną linię techniczną.</p>
+                <p className="text-gray-700">Możesz zgłosić problem przez formularz kontaktowy wybierając kategorię &ldquo;Wsparcie techniczne&rdquo; lub dzwoniąc na dedykowaną linię techniczną.</p>
               </div>
             </div>
           </Card>

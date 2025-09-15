@@ -5,13 +5,15 @@ interface CardProps {
   className?: string;
   padding?: 'none' | 'sm' | 'md' | 'lg';
   elevation?: 'none' | 'sm' | 'md' | 'lg';
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Card({
   children,
   className = '',
   padding = 'md',
-  elevation = 'sm'
+  elevation = 'sm',
+  onClick
 }: CardProps) {
   const paddingClasses = {
     none: '',
@@ -28,7 +30,10 @@ export default function Card({
   };
   
   return (
-    <div className={`bg-white rounded-xl border border-gray-100 ${paddingClasses[padding]} ${elevationClasses[elevation]} ${className}`}>
+    <div 
+      className={`bg-white rounded-xl border border-gray-100 ${paddingClasses[padding]} ${elevationClasses[elevation]} ${className}`}
+      onClick={onClick}
+    >
       {children}
     </div>
   );

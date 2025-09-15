@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
-import Card from '../ui/Card';
 import Icon from '../ui/Icon';
 
 interface RiskCalculatorProps {
@@ -23,7 +22,7 @@ interface FormData {
   immediateReconstruction: string;
 }
 
-export default function RiskCalculator({ isOpen, onClose, userRole }: RiskCalculatorProps) {
+export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps) {
   const [formData, setFormData] = useState<FormData>({
     age: 55,
     bmi: 27.1,
@@ -38,13 +37,7 @@ export default function RiskCalculator({ isOpen, onClose, userRole }: RiskCalcul
   const [isCalculating, setIsCalculating] = useState(false);
   const [riskResult, setRiskResult] = useState<number | null>(null);
 
-  const roleColors = {
-    patient: 'pink',
-    doctor: 'blue',
-    admin: 'green'
-  };
 
-  const currentColor = roleColors[userRole];
 
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData(prev => ({
