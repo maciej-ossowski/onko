@@ -9,6 +9,7 @@ interface RiskCalculatorProps {
   isOpen: boolean;
   onClose: () => void;
   userRole: 'patient' | 'doctor' | 'admin';
+  onRiskCalculated?: (score: number) => void;
 }
 
 interface FormData {
@@ -22,7 +23,7 @@ interface FormData {
   immediateReconstruction: string;
 }
 
-export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps) {
+export default function RiskCalculator({ isOpen, onClose, onRiskCalculated }: RiskCalculatorProps) {
   const [formData, setFormData] = useState<FormData>({
     age: 55,
     bmi: 27.1,
@@ -56,6 +57,7 @@ export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps)
     // Mock calculation result (12% as shown in the image)
     const calculatedRisk = 12;
     setRiskResult(calculatedRisk);
+    onRiskCalculated?.(calculatedRisk);
     setIsCalculating(false);
   };
 
@@ -79,9 +81,9 @@ export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps)
         {!isCalculating && !riskResult && (
           <>
             {/* Form */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-8">
               {/* Left Column */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Wiek</label>
                   <div className="relative">
@@ -162,7 +164,7 @@ export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps)
               </div>
 
               {/* Right Column */}
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">ASA</label>
                   <select
@@ -219,7 +221,7 @@ export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps)
             {/* Calculate Button */}
             <div className="flex justify-center pt-4">
               <Button
-                variant="primary"
+                variant="outline"
                 size="lg"
                 onClick={handleCalculate}
                 className="px-8"
@@ -278,7 +280,7 @@ export default function RiskCalculator({ isOpen, onClose }: RiskCalculatorProps)
                 Nowe obliczenie
               </Button>
               <Button
-                variant="primary"
+                variant="outline"
                 size="lg"
                 onClick={onClose}
               >

@@ -15,10 +15,6 @@ interface HeaderProps {
   actions?: React.ReactNode;
   onSettings?: () => void;
   onShare?: () => void;
-  onChat?: () => void;
-  onNotifications?: () => void;
-  chatCount?: number;
-  notificationsCount?: number;
 }
 
 export default function Header({
@@ -31,11 +27,7 @@ export default function Header({
   onBack,
   actions,
   onSettings,
-  onShare,
-  onChat,
-  onNotifications,
-  chatCount = 0,
-  notificationsCount = 0
+  onShare
 }: HeaderProps) {
   const roleConfig = {
     patient: {
@@ -72,17 +64,6 @@ export default function Header({
 
   // Create dropdown items
   const dropdownItems = [
-    // Add chat and notifications for patients on mobile
-    ...(userRole === 'patient' && onChat ? [{
-      label: `Wiadomości${chatCount > 0 ? ` (${chatCount})` : ''}`,
-      icon: 'message' as const,
-      onClick: onChat
-    }] : []),
-    ...(userRole === 'patient' && onNotifications ? [{
-      label: `Powiadomienia${notificationsCount > 0 ? ` (${notificationsCount})` : ''}`,
-      icon: 'mail' as const,
-      onClick: onNotifications
-    }] : []),
     {
       label: 'Ustawienia',
       icon: 'settings',
@@ -152,11 +133,11 @@ export default function Header({
                   </div>
                   
                   {/* Name - only on larger screens */}
-                  <div className="text-left hidden sm:block">
+                  <div className="text-center hidden sm:block">
                     <div className="text-sm font-medium text-white ml-3">
                       {userName || config.label}
                     </div>
-                    <div className={`text-xs ${userRole === 'patient' ? 'text-pink-200' : userRole === 'doctor' ? 'text-blue-200' : 'text-green-200'}`}>
+                    <div className={`text-xs ${userRole === 'patient' ? 'text-pink-200' : userRole === 'doctor' ? 'text-blue-200' : 'text-green-200'} ml-3`}>
                       {config.label}
                     </div>
                   </div>

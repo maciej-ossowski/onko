@@ -1,15 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import LoginCard from '@/components/layout/LoginCard';
 import LoginButton from '@/components/auth/LoginButton';
 import Card from '@/components/ui/Card';
+import TreatmentStageModal from '@/components/patient/TreatmentStageModal';
 
 export default function PatientLogin() {
   const router = useRouter();
+  const [showTreatmentModal, setShowTreatmentModal] = useState(false);
 
   const handleLogin = (method: string) => {
     console.log(`Logowanie przez: ${method}`);
+    
+    // Check if patient data exists in localStorage
+    const existingData = localStorage.getItem('onko_patient_data');
+    
+    if (existingData) {
+      // Data exists, go directly to dashboard
+      router.push('/patient/dashboard');
+    } else {
+      // No data, show treatment stage modal
+      setShowTreatmentModal(true);
+    }
+  };
+
+  const handleTreatmentComplete = () => {
+    setShowTreatmentModal(false);
     router.push('/patient/dashboard');
   };
 
@@ -18,6 +36,7 @@ export default function PatientLogin() {
   };
 
   return (
+    <>
     <LoginCard
       title="Logowanie - Pacjentka"
       subtitle="Zaloguj się przez Profil Zaufany lub social media"
@@ -69,5 +88,13 @@ export default function PatientLogin() {
         </p>
       </Card>
     </LoginCard>
+
+    {/* Treatment Stage Modal */}
+    <TreatmentStageModal
+      isOpen={showTreatmentModal}
+      onClose={() => setShowTreatmentModal(false)}
+      onComplete={handleTreatmentComplete}
+    />
+    </>
   );
 }
