@@ -298,7 +298,7 @@ export default function PatientDashboard() {
           <>
             <Card className="text-center p-6">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Icon name="check-circle" size="lg" className="text-green-600" />
+                <Icon name="recycling" size="lg" className="text-green-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">Follow-up</h3>
               <p className="text-gray-600 text-sm mb-4">Kontrola po zakończeniu leczenia</p>
